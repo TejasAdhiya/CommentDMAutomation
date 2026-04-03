@@ -57,7 +57,7 @@ Turn comments into conversations instantly with smart keyword-triggered DMs.
    - Permissions needed: `instagram_business_basic`, `instagram_business_manage_messages`, `instagram_business_manage_comments`
 3. **IG_BUSINESS_ACCOUNT_ID**: 
    - Found in Meta Business Suite → Instagram Settings
-   - Long number like `17841433084275074`
+   - Long number like `178414330845.....`
 
 ---
 
@@ -89,7 +89,58 @@ npm run dev
 
 ---
 
-## 🚀 Deployment
+## 🚀 One-Click Deployment
+
+### Step 1: Deploy Backend to Railway
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.com/deploy/balanced-comfort?referralCode=Ysyqwj)
+
+Click the button above and:
+1. Sign in to Railway
+2. Enter these 3 environment variables:
+   - `VERIFY_TOKEN` - Any random string (e.g., `my_secret_123`)
+   - `INSTAGRAM_ACCESS_TOKEN` - Your Instagram token (starts with `IGAA`)
+   - `IG_BUSINESS_ACCOUNT_ID` - Your Instagram Business Account ID
+3. Click **Deploy**
+4. **Copy your Railway URL** (e.g., `https://your-app.railway.app`)
+
+### Step 2: Deploy Frontend to Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/TejasAdhiya/CommentDMAutomation&root-directory=frontend&env=NEXT_PUBLIC_API_URL&envDescription=Backend%20API%20URL%20from%20Railway%20(without%20trailing%20slash)&envLink=https://github.com/TejasAdhiya/CommentDMAutomation&project-name=instagram-dm-automation&demo-title=Instagram%20DM%20Automation&demo-description=Automate%20Instagram%20engagement%20with%20smart%20keyword-triggered%20DMs)
+
+Click the button above and:
+1. Sign in to Vercel
+2. Enter environment variable:
+   - `NEXT_PUBLIC_API_URL` - Your Railway URL from Step 1 (e.g., `https://your-app.railway.app`)
+   - ⚠️ **Important**: No trailing slash!
+3. Click **Deploy**
+4. **Copy your Vercel URL** (e.g., `https://your-app.vercel.app`)
+
+### Step 3: Configure Instagram Webhook
+
+1. Go to [Meta App Dashboard](https://developers.facebook.com/apps/)
+2. Select your app → Webhooks
+3. Configure Instagram webhook:
+   - **Callback URL**: `https://your-railway-url.railway.app/webhook`
+   - **Verify Token**: Your `VERIFY_TOKEN` from Step 1
+4. Click **Verify and Save**
+5. Subscribe to **comments** field only
+6. Save
+
+### Step 4: Test Your Setup! 🎉
+
+1. Open your Vercel URL
+2. Click on a reel to configure it
+3. Set trigger keyword, DM message, and comment reply
+4. Comment on your Instagram reel with the trigger keyword
+5. Check if you receive a DM!
+
+---
+
+## 📝 Manual Deployment
+
+<details>
+<summary>Click to expand manual deployment instructions</summary>
 
 ### 🚂 Railway (Backend)
 
@@ -115,6 +166,8 @@ npm run dev
    NEXT_PUBLIC_API_URL=https://your-railway-url.railway.app
    ```
 5. Deploy! 🎊
+
+</details>
 
 ### 🔗 Configure Webhook
 
